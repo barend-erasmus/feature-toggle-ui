@@ -15,7 +15,10 @@
       <label>Name:</label>
       <input [(ngModel)]="model.project.name" type="text" class="form-control">
     </div>
-    <button (click)="model.onClick_Submit()" class="btn btn-success pull-right">Submit</button>
+    <div *ngFor="let message of model.validationMessages">
+      <p class="text-danger">{{message}}</p>
+    </div>
+    <button (click)="model.onClick_Submit()" class="btn btn-success pull-right"><i class="fa fa-save"></i>&nbsp;Submit</button>
   </div>
 </div>
 <!-- /#page-wrapper -->

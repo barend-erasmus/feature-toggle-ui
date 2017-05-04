@@ -8,11 +8,16 @@ import { RouterModule } from '@angular/router';
 // Imports components
 import { AppComponent } from './app.component';
 import { ProjectsListComponent } from './projects-list/projects-list.component';
+import { HomeRouteComponent } from './home-route/home-route.component';
+import { ProjectsCreateRouteComponent } from './projects-create-route/projects-create-route.component';
+import { FeaturesListRouteComponent } from './features-list-route/features-list-route.component';
+import { FeaturesCreateRouteComponent } from './features-create-route/features-create-route.component';
 
 // Imports services
 import { ProjectsService } from './services/projects.service';
-import { HomeRouteComponent } from './home-route/home-route.component';
-import { ProjectsCreateRouteComponent } from './projects-create-route/projects-create-route.component';
+import { FeaturesService } from './services/features.service';
+
+
 
 const router = RouterModule.forRoot([
   {
@@ -23,6 +28,14 @@ const router = RouterModule.forRoot([
     component: ProjectsCreateRouteComponent,
     path: 'projects/create',
   },
+  {
+    component: FeaturesListRouteComponent,
+    path: 'features',
+  },
+  {
+    component: FeaturesCreateRouteComponent,
+    path: 'features/create',
+  },
 ]);
 
 @NgModule({
@@ -30,7 +43,9 @@ const router = RouterModule.forRoot([
     AppComponent,
     ProjectsListComponent,
     HomeRouteComponent,
-    ProjectsCreateRouteComponent
+    ProjectsCreateRouteComponent,
+    FeaturesListRouteComponent,
+    FeaturesCreateRouteComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +54,8 @@ const router = RouterModule.forRoot([
     router
   ],
   providers: [
-    ProjectsService
+    ProjectsService,
+    FeaturesService
   ],
   bootstrap: [AppComponent]
 })
