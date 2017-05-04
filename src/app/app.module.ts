@@ -16,6 +16,7 @@ import { FeaturesCreateRouteComponent } from './features-create-route/features-c
 // Imports services
 import { ProjectsService } from './services/projects.service';
 import { FeaturesService } from './services/features.service';
+import { FeaturesEditRouteComponent } from './features-edit-route/features-edit-route.component';
 
 
 
@@ -45,7 +46,8 @@ const router = RouterModule.forRoot([
     HomeRouteComponent,
     ProjectsCreateRouteComponent,
     FeaturesListRouteComponent,
-    FeaturesCreateRouteComponent
+    FeaturesCreateRouteComponent,
+    FeaturesEditRouteComponent
   ],
   imports: [
     BrowserModule,
