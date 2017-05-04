@@ -1,0 +1,25 @@
+<div class="row" *ngIf="model != null">
+    <h2>
+      Projects
+      <button class="btn btn-primary pull-right">Create Project</button>
+    </h2>
+    <p>The .table-striped class adds zebra-stripes to a table:</p>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Key</th>
+          <th>Name</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let project of model.projects">
+          <td>{{project.key}}</td>
+          <td>{{project.name}}</td>
+          <td>
+            NO ACTIONS AVAILABLE
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
