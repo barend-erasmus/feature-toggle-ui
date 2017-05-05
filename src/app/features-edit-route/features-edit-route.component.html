@@ -47,9 +47,7 @@
               </select>
             </div>
           </td>
-          <td>
-           
-          </td>
+          <td></td>
           <td>
             <button (click)="model.onClick_AddGroup()" class="btn btn-success"><i class="fa fa-plus"></i>&nbsp;Add</button>
           </td>
@@ -79,12 +77,26 @@
         </tr>
       </thead>
       <tbody>
+        <tr>
+          <td>
+            <input [(ngModel)]="model.addOption.key" type="text" class="form-control">
+          </td>
+          <td>
+            <input [(ngModel)]="model.addOption.name" type="text" class="form-control">
+          </td>
+          <td>
+            <input [(ngModel)]="model.addOption.value" type="text" class="form-control">
+          </td>
+          <td>
+            <button (click)="model.onClick_AddOption()" class="btn btn-success"><i class="fa fa-plus"></i>&nbsp;Add</button>
+          </td>
+        </tr>
         <tr *ngFor="let option of model.feature.options">
           <td>{{option.key}}</td>
           <td>{{option.name}}</td>
           <td>{{option.value}}</td>
           <td>
-            <button class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;Remove</button>
+            <button (click)="model.onClick_RemoveOption(option.key)" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;Remove</button>
           </td>
         </tr>
       </tbody>

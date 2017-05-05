@@ -2,6 +2,7 @@
 import { Feature } from './../models/feature';
 import { Project } from './../models/project';
 import { Group } from './../models/group';
+import { Option } from './../models/option';
 import { AssociatedProject } from './../models/associated-project';
 
 // Imports services
@@ -14,11 +15,13 @@ export class FeaturesEditViewModel {
     public projects: Project[];
     public groups: Group[];
     public addGroup: Group;
+    public addOption: Option;
     public validationMessages: string[];
 
     constructor(private featuresService: FeaturesService, private groupsService: GroupsService) {
         this.feature = new Feature(null, null, null, [], new AssociatedProject(null, null, null), null, []);
         this.addGroup = new Group(null, null, [], null);
+        this.addOption = new Option(null, null, null);
     }
 
     public loadFeature(key: string): void {
@@ -44,6 +47,24 @@ export class FeaturesEditViewModel {
 
     public onClick_RemoveGroup(key: string) {
         this.featuresService.removeGroups(this.feature.key, [
+            key
+        ]).subscribe((x) => {
+            this.loadFeature(this.feature.key);
+        });
+    }
+
+
+    public onClick_AddOption() {
+        this.featuresService.addOptions(this.feature.key, [
+            this.addOption
+        ]).subscribe((x) => {
+            this.addGroup.key = null;
+            this.loadFeature(this.feature.key);
+        });
+    }
+
+    public onClick_RemoveOption(key: string) {
+        this.featuresService.removeOptions(this.feature.key, [
             key
         ]).subscribe((x) => {
             this.loadFeature(this.feature.key);

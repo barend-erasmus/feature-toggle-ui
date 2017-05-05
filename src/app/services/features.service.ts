@@ -47,6 +47,23 @@ export class FeaturesService {
     })).map((x) => true);
   }
 
+  public addOptions(key: string, options: Option[]): Observable<boolean> {
+    return this.http.post(`http://featuretoggleservice.euromonitor.local:9000/api/features/options`, {
+      key: key,
+      options: options
+    })
+      .map((x) => true);
+  }
+
+  public removeOptions(key: string, optionKeys: string[]): Observable<boolean> {
+    return this.http.delete(`http://featuretoggleservice.euromonitor.local:9000/api/features/options`, new RequestOptions({
+      body: {
+        key: key,
+        optionKeys: optionKeys
+      }
+    })).map((x) => true);
+  }
+
   public create(name: string, key: string, type: string, projectKey: string): Observable<Feature> {
     return this.http.post('http://featuretoggleservice.euromonitor.local:9000/api/features', {
       name: name,
