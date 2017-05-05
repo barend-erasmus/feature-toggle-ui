@@ -1,0 +1,55 @@
+<div id="page-wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Groups - Edit</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+  </div>
+  <!-- /.row -->
+  <div class="row">
+    <div class="form-group">
+      <label>Key:</label>
+      <span>{{model.group.key}}</span>
+    </div>
+    <div class="form-group">
+      <label>Name:</label>
+      <span>{{model.group.name}}</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <h2>
+      Consumers
+    </h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="form-group">
+              <input class="form-control" [(ngModel)]="model.addConsumer.id" /> 
+            </div>
+          </td>
+          <td></td>
+          <td>
+            <button (click)="model.onClick_AddConsumer()" class="btn btn-success"><i class="fa fa-plus"></i>&nbsp;Add</button>
+          </td>
+        </tr>
+        <tr *ngFor="let consumer of model.group.consumers">
+          <td>{{consumer.id}}</td>
+          <td>{{consumer.displayName}}</td>
+          <td>
+            <button (click)="model.onClick_RemoveConsumer(consumer.id)" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;Remove</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- /#page-wrapper -->
