@@ -18,16 +18,12 @@ export class FeaturesCreateRouteComponent implements OnInit {
   public model: FeaturesCreateViewModel;
 
   constructor(private projectsService: ProjectsService, private featuresService: FeaturesService) {
-    this.model = new FeaturesCreateViewModel(this.featuresService);
+    this.model = new FeaturesCreateViewModel(this.featuresService, this.projectsService);
   }
 
   ngOnInit() {
-    this.loadProjects();
+    this.model.loadProjects();
   }
 
-  private loadProjects(): void {
-    this.projectsService.list().subscribe((x) => {
-      this.model.projects = x;
-    });
-  }
+
 }

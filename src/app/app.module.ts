@@ -12,12 +12,12 @@ import { HomeRouteComponent } from './home-route/home-route.component';
 import { ProjectsCreateRouteComponent } from './projects-create-route/projects-create-route.component';
 import { FeaturesListRouteComponent } from './features-list-route/features-list-route.component';
 import { FeaturesCreateRouteComponent } from './features-create-route/features-create-route.component';
+import { FeaturesEditRouteComponent } from './features-edit-route/features-edit-route.component';
 
 // Imports services
 import { ProjectsService } from './services/projects.service';
 import { FeaturesService } from './services/features.service';
-import { FeaturesEditRouteComponent } from './features-edit-route/features-edit-route.component';
-
+import { GroupsService } from './services/groups.service';
 
 
 const router = RouterModule.forRoot([
@@ -36,6 +36,10 @@ const router = RouterModule.forRoot([
   {
     component: FeaturesCreateRouteComponent,
     path: 'features/create',
+  },
+  {
+    component: FeaturesEditRouteComponent,
+    path: 'features/edit',
   },
 ]);
 
@@ -57,7 +61,8 @@ const router = RouterModule.forRoot([
   ],
   providers: [
     ProjectsService,
-    FeaturesService
+    FeaturesService,
+    GroupsService
   ],
   bootstrap: [AppComponent]
 })

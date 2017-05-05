@@ -5,6 +5,7 @@ import { AssociatedProject } from './../models/associated-project';
 
 // Imports services
 import { FeaturesService } from './../services/features.service';
+import { ProjectsService } from './../services/projects.service';
 
 export class FeaturesCreateViewModel {
 
@@ -12,7 +13,7 @@ export class FeaturesCreateViewModel {
     public projects: Project[];
     public validationMessages: string[];
 
-    constructor(private featuresService: FeaturesService) {
+    constructor(private featuresService: FeaturesService, private projectsService: ProjectsService) {
         this.feature = new Feature(null, null, null, [], new AssociatedProject(null, null, null), null, []);
     }
 
@@ -22,6 +23,12 @@ export class FeaturesCreateViewModel {
                 window.location.href = '/features';
             });
         }
+    }
+
+    public loadProjects(): void {
+        this.projectsService.list().subscribe((x) => {
+            this.projects = x;
+        });
     }
 
     public validate(): boolean {

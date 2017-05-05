@@ -17,17 +17,11 @@ export class ProjectsListComponent implements OnInit {
   public model: ProjectsListViewModel;
 
   constructor(private projectsService: ProjectsService) {
-    this.model = new ProjectsListViewModel();
+    this.model = new ProjectsListViewModel(this.projectsService);
   }
 
   ngOnInit() {
-    this.loadProjects();
-  }
-
-  private loadProjects(): void {
-    this.projectsService.list().subscribe((x) => {
-      this.model.projects = x;
-    });
+    this.model.loadProjects();
   }
 
 }
