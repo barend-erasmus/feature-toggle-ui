@@ -13,12 +13,13 @@ import { ProjectsCreateRouteComponent } from './projects-create-route/projects-c
 import { FeaturesListRouteComponent } from './features-list-route/features-list-route.component';
 import { FeaturesCreateRouteComponent } from './features-create-route/features-create-route.component';
 import { FeaturesEditRouteComponent } from './features-edit-route/features-edit-route.component';
+import { GroupsListRouteComponent } from './groups-list-route/groups-list-route.component';
+import { GroupsCreateRouteComponent } from './groups-create-route/groups-create-route.component';
 
 // Imports services
 import { ProjectsService } from './services/projects.service';
 import { FeaturesService } from './services/features.service';
 import { GroupsService } from './services/groups.service';
-
 
 const router = RouterModule.forRoot([
   {
@@ -41,6 +42,14 @@ const router = RouterModule.forRoot([
     component: FeaturesEditRouteComponent,
     path: 'features/edit',
   },
+  {
+    component: GroupsListRouteComponent,
+    path: 'groups',
+  },
+  {
+    component: GroupsCreateRouteComponent,
+    path: 'groups/create',
+  },
 ]);
 
 @NgModule({
@@ -51,7 +60,9 @@ const router = RouterModule.forRoot([
     ProjectsCreateRouteComponent,
     FeaturesListRouteComponent,
     FeaturesCreateRouteComponent,
-    FeaturesEditRouteComponent
+    FeaturesEditRouteComponent,
+    GroupsListRouteComponent,
+    GroupsCreateRouteComponent
   ],
   imports: [
     BrowserModule,

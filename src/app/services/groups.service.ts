@@ -17,6 +17,13 @@ export class GroupsService {
     return this.http.get('http://featuretoggleservice.euromonitor.local:9000/api/groups')
       .map((x) => x.json().map((y) => this.mapGroup(y)));
   }
+
+  public create(name: string, key: string): Observable<Group> {
+    return this.http.post('http://featuretoggleservice.euromonitor.local:9000/api/groups', {
+      name: name,
+      key: key
+    }).map((x) => this.mapGroup(x.json()));
+  }
   
   private mapGroup(group: any): Group {
     return new Group(group.key, group.name, group.consumers, group.createdTimestamp);
