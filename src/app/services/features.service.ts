@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { environment } from './../../environments/environment';
 
 // Imports models
 import { Feature } from './../models/feature';
@@ -17,21 +18,21 @@ export class FeaturesService {
 
   public list(projectKey: string): Observable<Feature[]> {
     if (projectKey === null) {
-      return this.http.get(`http://featuretoggleservice.euromonitor.local:9000/api/features`)
+      return this.http.get(`${environment.api.uri}:${environment.api.port}/api/features`)
         .map((x) => x.json().map((y) => this.mapFeature(y)));
     } else {
-      return this.http.get(`http://featuretoggleservice.euromonitor.local:9000/api/features?projectKey=${projectKey}`)
+      return this.http.get(`${environment.api.uri}:${environment.api.port}/api/features?projectKey=${projectKey}`)
         .map((x) => x.json().map((y) => this.mapFeature(y)));
     }
   }
 
   public find(key: string): Observable<Feature> {
-    return this.http.get(`http://featuretoggleservice.euromonitor.local:9000/api/features?key=${key}`)
+    return this.http.get(`${environment.api.uri}:${environment.api.port}/api/features?key=${key}`)
       .map((x) => this.mapFeature(x.json()));
   }
 
   public addGroups(key: string, groupKeys: string[]): Observable<boolean> {
-    return this.http.post(`http://featuretoggleservice.euromonitor.local:9000/api/features/groups`, {
+    return this.http.post(`${environment.api.uri}:${environment.api.port}/api/features/groups`, {
       key: key,
       groupKeys: groupKeys
     })
@@ -39,7 +40,7 @@ export class FeaturesService {
   }
 
   public removeGroups(key: string, groupKeys: string[]): Observable<boolean> {
-    return this.http.delete(`http://featuretoggleservice.euromonitor.local:9000/api/features/groups`, new RequestOptions({
+    return this.http.delete(`${environment.api.uri}:${environment.api.port}/api/features/groups`, new RequestOptions({
       body: {
         key: key,
         groupKeys: groupKeys
@@ -48,7 +49,7 @@ export class FeaturesService {
   }
 
   public addOptions(key: string, options: Option[]): Observable<boolean> {
-    return this.http.post(`http://featuretoggleservice.euromonitor.local:9000/api/features/options`, {
+    return this.http.post(`${environment.api.uri}:${environment.api.port}/api/features/options`, {
       key: key,
       options: options
     })
@@ -56,7 +57,7 @@ export class FeaturesService {
   }
 
   public removeOptions(key: string, optionKeys: string[]): Observable<boolean> {
-    return this.http.delete(`http://featuretoggleservice.euromonitor.local:9000/api/features/options`, new RequestOptions({
+    return this.http.delete(`${environment.api.uri}:${environment.api.port}/api/features/options`, new RequestOptions({
       body: {
         key: key,
         optionKeys: optionKeys
@@ -65,7 +66,7 @@ export class FeaturesService {
   }
 
   public create(name: string, key: string, type: string, projectKey: string): Observable<Feature> {
-    return this.http.post('http://featuretoggleservice.euromonitor.local:9000/api/features', {
+    return this.http.post(`${environment.api.uri}:${environment.api.port}/api/features`, {
       name: name,
       key: key,
       type: type,
@@ -74,7 +75,7 @@ export class FeaturesService {
   }
 
   public toggle(key: string): Observable<boolean> {
-    return this.http.put('http://featuretoggleservice.euromonitor.local:9000/api/features/toggle', {
+    return this.http.put(`${environment.api.uri}:${environment.api.port}/api/features/toggle`, {
       key: key,
     }).map((x) => true);
   }
