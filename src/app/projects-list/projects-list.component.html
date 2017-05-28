@@ -1,0 +1,24 @@
+<div class="row" *ngIf="model != null">
+    <h2>
+      Projects
+      <a href="/projects/create" class="btn btn-primary pull-right"><i class="fa fa-plus"></i>&nbsp;Create Project</a>
+    </h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Key</th>
+          <th>Name</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let project of model.projects">
+          <td>{{project.key}}</td>
+          <td>{{project.name}}</td>
+          <td>
+            NO ACTIONS AVAILABLE
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
