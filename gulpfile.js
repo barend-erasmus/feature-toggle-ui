@@ -24,7 +24,7 @@ gulp.task('publish:source', function () {
 
     return gulp
         .src(['./dist/**'])
-        .pipe(gulpSSH.dest(argv.dest));
+        .pipe(gulpSSH.dest(`/opt/${argv.service}`));
 });
 
 gulp.task('publish:dockerfile', function () {
@@ -42,7 +42,7 @@ gulp.task('publish:dockerfile', function () {
 
     return gulp
         .src(['./Dockerfile', './nginx.conf'])
-        .pipe(gulpSSH.dest(argv.dest));
+        .pipe(gulpSSH.dest(`/docker-uploads/${argv.service}`));
 });
 
 gulp.task('docker:stop', function (done) {
@@ -75,7 +75,7 @@ gulp.task('docker:build', function (done) {
         password: argv.password
     }).then(function () {
         ssh.execCommand(`docker build --no-cache -t ${argv.service} /docker-uploads/${argv.service}`).then(function (result) {
-            return ssh.execCommand(`docker run -d -p 9090:4200 -v /opt/feature-toggle-ui:/usr/share/nginx/html --name ${argv.service} -t ${argv.service}`);
+            return ssh.execCommand(`docker run -d -p 9090:4200 -v /opt/${argv.service}:/usr/share/nginx/html --name ${argv.service} -t ${argv.service}`);
         }).then(function (result) {
             ssh.dispose();
             done();
