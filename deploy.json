@@ -1,0 +1,29 @@
+{
+    "machine": {
+        "host": "$host",
+        "username": "$username",
+        "password": "$password"
+    },
+    "commands": [
+        "docker stop feature-toggle-ui",
+        "docker rm feature-toggle-ui",
+        "docker build --no-cache -t feature-toggle-ui /docker-uploads/feature-toggle-ui",
+        "docker run -d -p 9090:4200 -v /opt/feature-toggle-ui:/usr/share/nginx/html --name feature-toggle-ui -t feature-toggle-ui"
+    ],
+    "directories": [
+        {
+            "source": "$workspace/dist",
+            "destination": "/opt/feature-toggle-ui"
+        }
+    ],
+    "files": [
+        {
+            "source": "$workspace/Dockerfile",
+            "destination": "/docker-uploads/feature-toggle-ui/Dockerfile"
+        },
+        {
+            "source": "$workspace/nginx.conf",
+            "destination": "/docker-uploads/feature-toggle-ui/nginx.conf"
+        }
+    ]
+}
