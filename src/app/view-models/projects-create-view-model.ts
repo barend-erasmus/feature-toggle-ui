@@ -16,7 +16,7 @@ export class ProjectsCreateViewModel {
     public onClick_Submit() {
         if (this.validate()) {
             this.projectsService.create(this.project.name, this.project.key).subscribe((x) => {
-                window.location.href = '/';
+                window.location.href = '/featuretoggle/';
             });
         }
     }

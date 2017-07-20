@@ -14,12 +14,12 @@ export class ProjectsService {
   constructor(private http: Http) { }
 
   public list(): Observable<Project[]> {
-    return this.http.get(`${environment.api.uri}:${environment.api.port}/api/projects`)
+    return this.http.get(`${environment.api.uri}/api/projects`)
     .map((x) => x.json().map((y) => this.mapProject(y)));
   }
 
   public create(name: string, key: string): Observable<Project> {
-    return this.http.post(`${environment.api.uri}:${environment.api.port}/api/projects`, {
+    return this.http.post(`${environment.api.uri}/api/projects`, {
       name: name,
       key: key
     }).map((x) => this.mapProject(x.json()));

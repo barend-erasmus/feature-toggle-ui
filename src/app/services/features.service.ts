@@ -18,21 +18,21 @@ export class FeaturesService {
 
   public list(projectKey: string): Observable<Feature[]> {
     if (projectKey === null) {
-      return this.http.get(`${environment.api.uri}:${environment.api.port}/api/features`)
+      return this.http.get(`${environment.api.uri}/api/features`)
         .map((x) => x.json().map((y) => this.mapFeature(y)));
     } else {
-      return this.http.get(`${environment.api.uri}:${environment.api.port}/api/features?projectKey=${projectKey}`)
+      return this.http.get(`${environment.api.uri}/api/features?projectKey=${projectKey}`)
         .map((x) => x.json().map((y) => this.mapFeature(y)));
     }
   }
 
   public find(key: string): Observable<Feature> {
-    return this.http.get(`${environment.api.uri}:${environment.api.port}/api/features?key=${key}`)
+    return this.http.get(`${environment.api.uri}/api/features?key=${key}`)
       .map((x) => this.mapFeature(x.json()));
   }
 
   public addGroups(key: string, groupKeys: string[]): Observable<boolean> {
-    return this.http.post(`${environment.api.uri}:${environment.api.port}/api/features/groups`, {
+    return this.http.post(`${environment.api.uri}/api/features/groups`, {
       key: key,
       groupKeys: groupKeys
     })
@@ -40,7 +40,7 @@ export class FeaturesService {
   }
 
   public removeGroups(key: string, groupKeys: string[]): Observable<boolean> {
-    return this.http.delete(`${environment.api.uri}:${environment.api.port}/api/features/groups`, new RequestOptions({
+    return this.http.delete(`${environment.api.uri}/api/features/groups`, new RequestOptions({
       body: {
         key: key,
         groupKeys: groupKeys
@@ -49,7 +49,7 @@ export class FeaturesService {
   }
 
   public addOptions(key: string, options: Option[]): Observable<boolean> {
-    return this.http.post(`${environment.api.uri}:${environment.api.port}/api/features/options`, {
+    return this.http.post(`${environment.api.uri}/api/features/options`, {
       key: key,
       options: options
     })
@@ -57,7 +57,7 @@ export class FeaturesService {
   }
 
   public removeOptions(key: string, optionKeys: string[]): Observable<boolean> {
-    return this.http.delete(`${environment.api.uri}:${environment.api.port}/api/features/options`, new RequestOptions({
+    return this.http.delete(`${environment.api.uri}/api/features/options`, new RequestOptions({
       body: {
         key: key,
         optionKeys: optionKeys
@@ -66,7 +66,7 @@ export class FeaturesService {
   }
 
   public create(name: string, key: string, type: string, projectKey: string): Observable<Feature> {
-    return this.http.post(`${environment.api.uri}:${environment.api.port}/api/features`, {
+    return this.http.post(`${environment.api.uri}/api/features`, {
       name: name,
       key: key,
       type: type,
@@ -75,7 +75,7 @@ export class FeaturesService {
   }
 
   public toggle(key: string): Observable<boolean> {
-    return this.http.put(`${environment.api.uri}:${environment.api.port}/api/features/toggle`, {
+    return this.http.put(`${environment.api.uri}/api/features/toggle`, {
       key: key,
     }).map((x) => true);
   }

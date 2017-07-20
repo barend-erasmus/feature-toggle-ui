@@ -9,7 +9,7 @@
   <div class="row" *ngIf="model != null">
     <h2>
       Groups
-      <a href="/groups/create" class="btn btn-primary pull-right"><i class="fa fa-plus"></i>&nbsp;Create Group</a>
+      <a href="/featuretoggle/groups/create" class="btn btn-primary pull-right"><i class="fa fa-plus"></i>&nbsp;Create Group</a>
     </h2>
     <table class="table table-striped">
       <thead>
@@ -24,7 +24,7 @@
           <td>{{group.key}}</td>
           <td>{{group.name}}</td>
           <td>
-            <a href="/groups/edit?key={{group.key}}" class="btn btn-warning"><i class="fa fa-edit"></i>&nbsp;Edit</a>
+            <a href="/featuretoggle/groups/edit?key={{group.key}}" class="btn btn-warning"><i class="fa fa-edit"></i>&nbsp;Edit</a>
           </td>
         </tr>
       </tbody>

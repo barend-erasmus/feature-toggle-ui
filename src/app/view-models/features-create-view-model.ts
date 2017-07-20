@@ -20,7 +20,7 @@ export class FeaturesCreateViewModel {
     public onClick_Submit() {
         if (this.validate()) {
             this.featuresService.create(this.feature.name, this.feature.key, this.feature.type, this.feature.associatedProject.key).subscribe((x) => {
-                window.location.href = '/features';
+                window.location.href = '/featuretoggle/features';
             });
         }
     }

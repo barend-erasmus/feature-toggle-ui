@@ -16,7 +16,7 @@ export class GroupsCreateViewModel {
     public onClick_Submit() {
         if (this.validate()) {
             this.groupsService.create(this.group.name, this.group.key).subscribe((x) => {
-                window.location.href = '/groups';
+                window.location.href = '/featuretoggle/groups';
             });
         }
     }

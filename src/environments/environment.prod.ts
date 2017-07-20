@@ -1,7 +1,6 @@
 export const environment = {
   production: true,
   api: {
-    uri: 'http://yourapidomain.com',
-    port: 'yourapiport'
+    uri: 'http://cpt.innovation.euromonitor.local/featuretoggleservice'
   }
 };

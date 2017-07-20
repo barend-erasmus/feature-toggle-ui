@@ -6,7 +6,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --aot --target=production --output-path=./dist",
+    "build": "ng build --aot --target=production --base-href \"/featuretoggle\"  --deploy-url \"/featuretoggle\" --output-path=./dist",
     "test": "ng test"
   },
   "private": true,
