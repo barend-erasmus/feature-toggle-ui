@@ -7,5 +7,6 @@ export const environment = {
   production: false,
   api: {
     uri: 'http://localhost:3000'
-  }
+  },
+  prefix: ''
 };

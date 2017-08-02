@@ -1,3 +1,6 @@
+// Imports
+import { environment } from './../../environments/environment';
+
 // Imports models
 import { Group } from './../models/group';
 
@@ -16,7 +19,7 @@ export class GroupsCreateViewModel {
     public onClick_Submit() {
         if (this.validate()) {
             this.groupsService.create(this.group.name, this.group.key).subscribe((x) => {
-                window.location.href = '/featuretoggle/groups';
+                window.location.href = `${environment.prefix}/groups`;
             });
         }
     }

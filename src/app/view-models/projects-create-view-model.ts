@@ -1,3 +1,6 @@
+// Imports
+import { environment } from './../../environments/environment';
+
 // Imports models
 import { Project } from './../models/project';
 
@@ -16,7 +19,7 @@ export class ProjectsCreateViewModel {
     public onClick_Submit() {
         if (this.validate()) {
             this.projectsService.create(this.project.name, this.project.key).subscribe((x) => {
-                window.location.href = '/featuretoggle/';
+                window.location.href = `${environment.prefix}/`;
             });
         }
     }

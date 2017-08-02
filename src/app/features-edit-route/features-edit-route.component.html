@@ -1,12 +1,22 @@
 <div id="page-wrapper">
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header">Features - Edit</h1>
+      <h1 class="page-header">
+        Features - Edit
+      </h1>
     </div>
     <!-- /.col-lg-12 -->
   </div>
   <!-- /.row -->
   <div class="row">
+    <div class="form-group">
+      <label>Environment:</label>
+      <select [(ngModel)]="model.selectedEnvironment">
+          <option [ngValue]="'development'">Development</option>
+          <option [ngValue]="'staging'">Staging</option>
+          <option [ngValue]="'live'">Live</option>
+      </select>
+    </div>
     <div class="form-group">
       <label>Key:</label>
       <span>{{model.feature.key}}</span>
@@ -24,83 +34,89 @@
       <span>{{model.feature.associatedProject.name}}</span>
     </div>
   </div>
-
-  <div class="row">
-    <h2>
-      Groups
-    </h2>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Key</th>
-          <th>Name</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <div class="form-group">
-              <select class="form-control" [(ngModel)]="model.addGroup.key"> 
+  <div *ngFor="let environment of model.feature.environments">
+    <div *ngIf="environment.key === model.selectedEnvironment">
+      <div class="row">
+        <h2>{{environment.name}}</h2>
+      </div>
+      <div class="row">
+        <h3>
+          Groups
+        </h3>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Key</th>
+              <th>Name</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="form-group">
+                  <select class="form-control" [(ngModel)]="model.addGroup.key"> 
                 <option selected="selected" disabled>Select a group</option>
                 <option *ngFor="let group of model.groups" [ngValue]="group.key">{{group.name}}</option>
               </select>
-            </div>
-          </td>
-          <td></td>
-          <td>
-            <button (click)="model.onClick_AddGroup()" class="btn btn-success"><i class="fa fa-plus"></i>&nbsp;Add</button>
-          </td>
-        </tr>
-        <tr *ngFor="let group of model.feature.groups">
-          <td>{{group.key}}</td>
-          <td>{{group.name}}</td>
-          <td>
-            <button (click)="model.onClick_RemoveGroup(group.key)" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;Remove</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+                </div>
+              </td>
+              <td></td>
+              <td>
+                <button (click)="model.onClick_AddGroup(environment.key)" class="btn btn-success pull-right"><i class="fa fa-plus"></i>&nbsp;Add</button>
+              </td>
+            </tr>
+            <tr *ngFor="let group of environment.groups">
+              <td>{{group.key}}</td>
+              <td>{{group.name}}</td>
+              <td>
+                <button (click)="model.onClick_RemoveGroup(group.key, environment.key)" class="btn btn-danger pull-right"><i class="fa fa-trash"></i>&nbsp;Remove</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-  <div class="row">
-    <h2>
-      Options
-    </h2>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Key</th>
-          <th>Name</th>
-          <th>Value</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <input [(ngModel)]="model.addOption.key" type="text" class="form-control">
-          </td>
-          <td>
-            <input [(ngModel)]="model.addOption.name" type="text" class="form-control">
-          </td>
-          <td>
-            <input [(ngModel)]="model.addOption.value" type="text" class="form-control">
-          </td>
-          <td>
-            <button (click)="model.onClick_AddOption()" class="btn btn-success"><i class="fa fa-plus"></i>&nbsp;Add</button>
-          </td>
-        </tr>
-        <tr *ngFor="let option of model.feature.options">
-          <td>{{option.key}}</td>
-          <td>{{option.name}}</td>
-          <td>{{option.value}}</td>
-          <td>
-            <button (click)="model.onClick_RemoveOption(option.key)" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;Remove</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      <div class="row">
+        <h3>
+          Options
+        </h3>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Key</th>
+              <th>Name</th>
+              <th>Value</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <input [(ngModel)]="model.addOption.key" type="text" class="form-control">
+              </td>
+              <td>
+                <input [(ngModel)]="model.addOption.name" type="text" class="form-control">
+              </td>
+              <td>
+                <input [(ngModel)]="model.addOption.value" type="text" class="form-control">
+              </td>
+              <td>
+                <button (click)="model.onClick_AddOption(environment.key)" class="btn btn-success pull-right"><i class="fa fa-plus"></i>&nbsp;Add</button>
+              </td>
+            </tr>
+            <tr *ngFor="let option of environment.options">
+              <td>{{option.key}}</td>
+              <td>{{option.name}}</td>
+              <td>{{option.value}}</td>
+              <td>
+                <button (click)="model.onClick_RemoveOption(option.key, environment.key)" class="btn btn-danger pull-right"><i class="fa fa-trash"></i>&nbsp;Remove</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
 <!-- /#page-wrapper -->

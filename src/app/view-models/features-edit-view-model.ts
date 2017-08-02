@@ -17,9 +17,10 @@ export class FeaturesEditViewModel {
     public addGroup: Group;
     public addOption: Option;
     public validationMessages: string[];
+    public selectedEnvironment: string = 'development';
 
     constructor(private featuresService: FeaturesService, private groupsService: GroupsService) {
-        this.feature = new Feature(null, null, null, [], new AssociatedProject(null, null, null), null, []);
+        this.feature = new Feature(null, null, null, [], new AssociatedProject(null, null, null), null);
         this.addGroup = new Group(null, null, [], null);
         this.addOption = new Option(null, null, null);
     }
@@ -36,37 +37,37 @@ export class FeaturesEditViewModel {
         });
     }
 
-    public onClick_AddGroup() {
+    public onClick_AddGroup(environmentKey: string) {
         this.featuresService.addGroups(this.feature.key, [
             this.addGroup.key
-        ]).subscribe((x) => {
+        ], environmentKey).subscribe((x) => {
             this.addGroup.key = null;
             this.loadFeature(this.feature.key);
         });
     }
 
-    public onClick_RemoveGroup(key: string) {
+    public onClick_RemoveGroup(key: string, environmentKey: string) {
         this.featuresService.removeGroups(this.feature.key, [
             key
-        ]).subscribe((x) => {
+        ], environmentKey).subscribe((x) => {
             this.loadFeature(this.feature.key);
         });
     }
 
 
-    public onClick_AddOption() {
+    public onClick_AddOption(environmentKey: string) {
         this.featuresService.addOptions(this.feature.key, [
             this.addOption
-        ]).subscribe((x) => {
+        ], environmentKey).subscribe((x) => {
             this.addGroup.key = null;
             this.loadFeature(this.feature.key);
         });
     }
 
-    public onClick_RemoveOption(key: string) {
+    public onClick_RemoveOption(key: string, environmentKey: string) {
         this.featuresService.removeOptions(this.feature.key, [
             key
-        ]).subscribe((x) => {
+        ], environmentKey).subscribe((x) => {
             this.loadFeature(this.feature.key);
         });
     }

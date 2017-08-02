@@ -9,6 +9,7 @@ import { environment } from './../../environments/environment';
 import { Feature } from './../models/feature';
 import { FeatureGroup } from './../models/feature-group';
 import { Option } from './../models/option';
+import { Environment } from './../models/environment';
 import { AssociatedProject } from './../models/associated-project';
 
 @Injectable()
@@ -31,36 +32,40 @@ export class FeaturesService {
       .map((x) => this.mapFeature(x.json()));
   }
 
-  public addGroups(key: string, groupKeys: string[]): Observable<boolean> {
+  public addGroups(key: string, groupKeys: string[], environmentKey: string): Observable<boolean> {
     return this.http.post(`${environment.api.uri}/api/features/groups`, {
       key: key,
-      groupKeys: groupKeys
+      groupKeys: groupKeys,
+      environmentKey: environmentKey
     })
       .map((x) => true);
   }
 
-  public removeGroups(key: string, groupKeys: string[]): Observable<boolean> {
+  public removeGroups(key: string, groupKeys: string[], environmentKey: string): Observable<boolean> {
     return this.http.delete(`${environment.api.uri}/api/features/groups`, new RequestOptions({
       body: {
         key: key,
-        groupKeys: groupKeys
+        groupKeys: groupKeys,
+        environmentKey: environmentKey
       }
     })).map((x) => true);
   }
 
-  public addOptions(key: string, options: Option[]): Observable<boolean> {
+  public addOptions(key: string, options: Option[], environmentKey: string): Observable<boolean> {
     return this.http.post(`${environment.api.uri}/api/features/options`, {
       key: key,
-      options: options
+      options: options,
+      environmentKey: environmentKey
     })
       .map((x) => true);
   }
 
-  public removeOptions(key: string, optionKeys: string[]): Observable<boolean> {
+  public removeOptions(key: string, optionKeys: string[], environmentKey: string): Observable<boolean> {
     return this.http.delete(`${environment.api.uri}/api/features/options`, new RequestOptions({
       body: {
         key: key,
-        optionKeys: optionKeys
+        optionKeys: optionKeys,
+        environmentKey: environmentKey
       }
     })).map((x) => true);
   }
@@ -88,12 +93,16 @@ export class FeaturesService {
     return options.map((x) => new Option(x.key, x.name, x.value));
   }
 
+  private mapEnvironments(environments: any[]): Environment[] {
+    return environments.map((x) => new Environment(x.key, x.name, this.mapGroups(x.groups), this.mapOptions(x.options), x.createdTimestamp));
+  }
+
   private mapAssociatedProject(associatedProject: any): AssociatedProject {
     return new AssociatedProject(associatedProject.key, associatedProject.name, associatedProject.createdTimestamp);
   }
 
   private mapFeature(feature: any): Feature {
-    const obj = new Feature(feature.key, feature.name, feature.type, this.mapGroups(feature.groups), this.mapAssociatedProject(feature.associatedProject), feature.createdTimestamp, this.mapOptions(feature.options));
+    const obj = new Feature(feature.key, feature.name, feature.type, this.mapEnvironments(feature.environments), this.mapAssociatedProject(feature.associatedProject), feature.createdTimestamp);
 
     obj.enabled = feature.enabled;
 

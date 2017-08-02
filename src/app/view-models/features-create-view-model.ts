@@ -2,6 +2,7 @@
 import { Feature } from './../models/feature';
 import { Project } from './../models/project';
 import { AssociatedProject } from './../models/associated-project';
+import { environment } from './../../environments/environment';
 
 // Imports services
 import { FeaturesService } from './../services/features.service';
@@ -20,7 +21,7 @@ export class FeaturesCreateViewModel {
     public onClick_Submit() {
         if (this.validate()) {
             this.featuresService.create(this.feature.name, this.feature.key, this.feature.type, this.feature.associatedProject.key).subscribe((x) => {
-                window.location.href = '/featuretoggle/features';
+                window.location.href = `${environment.prefix}/features`;
             });
         }
     }

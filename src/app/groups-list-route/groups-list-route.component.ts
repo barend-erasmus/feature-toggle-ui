@@ -1,5 +1,6 @@
 // Imports
 import { Component, OnInit } from '@angular/core';
+import { environment } from './../../environments/environment';
 
 // Imports services
 import { GroupsService } from './../services/groups.service';
@@ -15,6 +16,7 @@ import { GroupsListViewModel } from './../view-models/groups-list-view-model';
 export class GroupsListRouteComponent implements OnInit {
 
   public model: GroupsListViewModel;
+  public prefix: string = environment.prefix;
 
   constructor(private groupsService: GroupsService) { 
     this.model = new GroupsListViewModel(groupsService);

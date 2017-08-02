@@ -1,7 +1,6 @@
 // Imports models
 import { AssociatedProject } from './associated-project';
-import { FeatureGroup } from './feature-group';
-import { Option } from './option';
+import { Environment } from './environment';
 
 export class Feature {
 
@@ -11,10 +10,9 @@ export class Feature {
         public key: string,
         public name: string,
         public type: string,
-        public groups: FeatureGroup[],
+        public environments: Environment[],
         public associatedProject: AssociatedProject,
-        public createdTimestamp: number,
-        public options: Option[]) {
+        public createdTimestamp: number) {
 
     }
 
@@ -35,57 +33,12 @@ export class Feature {
         if (this.associatedProject === null) {
             return null;
         }
-
-        if (this.groups === null) {
-            return false;
-        }
-
-        if (this.options === null) {
-            return false;
-        }
-
         return true;
     }
 
     public toggle(): boolean {
 
         this.enabled = !this.enabled;
-
-        return true;
-    }
-
-    public assignGroup(group: FeatureGroup): boolean {
-
-        this.groups.push(group);
-
-        return true;
-    }
-
-    public deassignGroup(group: FeatureGroup): boolean {
-
-        const index = this.groups.findIndex((x) => x.key === group.key);
-
-        if (index > -1) {
-            this.groups.splice(index, 1);
-        }
-
-        return true;
-    }
-
-    public addOption(option: Option): boolean {
-
-        this.options.push(option);
-
-        return true;
-    }
-
-    public removeOption(option: Option): boolean {
-
-        const index = this.options.findIndex((x) => x.key === option.key);
-
-        if (index > -1) {
-            this.options.splice(index, 1);
-        }
 
         return true;
     }
