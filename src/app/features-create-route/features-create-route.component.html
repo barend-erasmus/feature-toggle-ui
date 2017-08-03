@@ -17,7 +17,12 @@
     </div>
     <div class="form-group">
       <label>Type:</label>
-      <input [(ngModel)]="model.feature.type" type="text" class="form-control">
+      <select [(ngModel)]="model.feature.type" class="form-control">
+        <option [ngValue]="'Release Toggle'">Release Toggle</option>
+        <option [ngValue]="'Ops Toggle'">Ops Toggle</option>
+        <option [ngValue]="'Experiment Toggle'">Experiment Toggle</option>
+        <option [ngValue]="'Permission Toggle'">Permission Toggle</option>
+      </select>
     </div>
     <div class="form-group">
       <label>Project:</label>

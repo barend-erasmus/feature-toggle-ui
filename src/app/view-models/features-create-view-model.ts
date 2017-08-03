@@ -15,7 +15,7 @@ export class FeaturesCreateViewModel {
     public validationMessages: string[];
 
     constructor(private featuresService: FeaturesService, private projectsService: ProjectsService) {
-        this.feature = new Feature(null, null, null, [], new AssociatedProject(null, null, null), null, []);
+        this.feature = new Feature(null, null, null, [], new AssociatedProject(null, null, null), null);
     }
 
     public onClick_Submit() {
